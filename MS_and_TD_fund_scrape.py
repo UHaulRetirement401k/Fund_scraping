@@ -32,7 +32,7 @@ class Morningstar_bot():
         Step 1: Enter the ticker symbol within the search box (top left of sheet, A1). Do not have any blanks in the column otherwise it may error."""
 
         # paths to metrics
-        self.NE ='//*[@id="__layout"]/div/div/div[2]/div[3]/div/main/div[2]/div/div/div/section[1]/div[1]/div[4]/div[2]/span/span'
+        self.NE ='//*[@id="__layout"]/div/div/div[2]/div[3]/div/main/div[2]/div/div/div[1]/section[1]/div[1]/div[3]/div[2]/span/span'
         self.Risk_tab = '//*[@id="fund__tab-risk"]/a/span/span'
 
         #Go to morningstar page, sleep for 2 seconds while it loads, grab NE, and then go to the risk page and sleep for 2 seconds while it loads
@@ -125,10 +125,10 @@ def fund_scrape(excel_path, csv_outputpath):
         excel_doc = xw.Book(f'{excel_path}')
         sheet = excel_doc.sheets['Sheet1']
 
-        # extract ticker list (from column A) as list. Selet if running first half or second half here:
-        #tickers = sheet.range('A:A').value
+        # extract ticker list (from column A) as list. Selet if running first part or second part etc... here:
+        tickers = sheet.range('A:A').value
         #tickers = sheet.range('B:B').value
-        tickers = sheet.range('C:C').value
+        #tickers = sheet.range('C:C').value
         #tickers = sheet.range('D:D').value
         #tickers = sheet.range('E:E').value
         tickers = [tick for tick in tickers if tick if tick != 'Ticker'] # if tick removes None values
@@ -147,9 +147,9 @@ def fund_scrape(excel_path, csv_outputpath):
         # create dictionary
         ticker_dict = dict(zip(tickers[0:250], metrics_list))
         ticker_df = pd.DataFrame.from_dict(ticker_dict)
-        #ticker_df.to_csv(csv_outputpath + '\\Fund_metrics_MSandTD_part1.csv')
+        ticker_df.to_csv(csv_outputpath + '\\Fund_metrics_MSandTD_part1.csv')
         #ticker_df.to_csv(csv_outputpath + '\\Fund_metrics_MSandTD_part2.csv')
-        ticker_df.to_csv(csv_outputpath + '\\Fund_metrics_MSandTD_part3.csv')
+        #ticker_df.to_csv(csv_outputpath + '\\Fund_metrics_MSandTD_part3.csv')
         #ticker_df.to_csv(csv_outputpath + '\\Fund_metrics_MSandTD_part4.csv')
         #ticker_df.to_csv(csv_outputpath + '\\Fund_metrics_MSandTD_part5.csv')
         # success
@@ -158,7 +158,8 @@ def fund_scrape(excel_path, csv_outputpath):
     except:
         print('The scrape did not run successfully')
 
-fund_scrape(excel_path=r'F:\401K\1. 401K & ESOP\User - Karsten\401k-ESOP-Canada\Fund Performance Review\Ticker_trials.xlsx', csv_outputpath=r'C:\Users\1263654\Desktop')
+fund_scrape(excel_path=r'F:\401K\1. 401K & ESOP\User - Karsten\401k-ESOP-Canada\Fund Performance Review\Scraping\list_of_tickers2022.04.19.xlsx'
+            , csv_outputpath=r'F:\401K\1. 401K & ESOP\User - Karsten\401k-ESOP-Canada\Fund Performance Review\Scraping\2022.09.30')
 
 
 

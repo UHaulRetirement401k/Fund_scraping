@@ -11,7 +11,6 @@ import random
 
 # class creation
 class Morningstar_bot():
-
     # instantiate class
     def __init__(self, ticker):
 
@@ -21,8 +20,8 @@ class Morningstar_bot():
 
         self.ticker = ticker
         #establish google chrome as the default webbrowser to use when calling driver
-        self.driver = webdriver.Chrome(r'C:\Users\1341951\Desktop\chromedriver.exe')
-        #self.driver = webdriver.Edge(r'C:\Users\1263654\Desktop\msedgedriver.exe')
+        #self.driver = webdriver.Chrome(r'C:\Users\1347074\Desktop\chromedriver\chromedriver.exe')
+        self.driver = webdriver.Edge(r'C:\Users\1347074\Desktop\msedgedriver\msedgedriver.exe')
 
         # paths to metrics on the quote page
         self.NE = '//*[@id="__layout"]/div/div/div[2]/div[3]/div/main/div[2]/div/div/div/section[1]/div[1]/div[4]/div[2]/span/span'
@@ -45,16 +44,9 @@ class Morningstar_bot():
         TTMyield = self.driver.find_element_by_xpath(self.TTMyield).get_attribute('innerHTML') 
         duration = self.driver.find_element_by_xpath(self.duration).get_attribute('innerHTML') 
 
-
-
-       
         #Click on the risk tab.
-        #//*[@id="__layout"]/div/div[2]/div[3]/div/main/nav/ul/a[4]/span/span
         self.driver.find_element_by_xpath('//*[@id="fund__tab-risk"]/a/span/span').click()
         sleep(2) # wait for 2 seconds
-
-
-
 
         # Now that you are on Risk page, grab beta, rsquare, sharpe, the upside, and downside for three years. 
         beta_3 = self.driver.find_element_by_xpath(self.beta).get_attribute('innerHTML') 
@@ -105,8 +97,7 @@ class Morningstar_bot():
         return_10 = ''.join(return_10.split('<span class="positive">'))
         return_10 = ''.join(return_10.split('%</span>'))
         return_10 = ''.join(return_10.split('<span class="negative">'))
-        (	)
-        	
+
         # create metric dictionary
         self.metric_dict = {
             # Organize and name rows for data.
@@ -154,11 +145,7 @@ def fund_scrape(excel_path, csv_outputpath):
         Loop through list of funds within the Excel spreadsheet
         """
         metrics_list = []
-        # testing update
-        for i in tickers:
-            print(i)
-            # i=tickers[0] #This has to be delted
-            metrics_list.append(Morningstar_bot(ticker=i).metric_dict)
+
 
         # create dictionary
         ticker_dict = dict(zip(tickers[0:50], metrics_list))
@@ -170,7 +157,5 @@ def fund_scrape(excel_path, csv_outputpath):
     except:
         print('The scrape did not run successfully')
 
-fund_scrape(excel_path=r'F:\401K\User - Karsten\401k-ESOP-Canada\Fund Performance Review\Bond_tickers.xls', csv_outputpath='C:\Users\1341951\Desktop')
-
-
-#VBMFX
+fund_scrape(excel_path=r'F:\401K\1. 401K & ESOP\User - Karsten\401k-ESOP-Canada\Fund Performance Review\Scraping\Bond_tickers.xlsx', 
+            csv_outputpath=r'F:\401K\1. 401K & ESOP\User - Karsten\401k-ESOP-Canada\Fund Performance Review\Scraping\2022.09.30')
