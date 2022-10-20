@@ -18,9 +18,6 @@ DataCompile = []
 
 for tick in TickerList:
         url_MS = r'https://www.morningstar.com/funds/xnas/'+(tick) +r'/quote'
-        url_MS2 = f'https://www.morningstar.com/funds/xnas/{tick}/quote'
-        #print(url_MS)
-        #print(tick)
         url_TD = r'https://research.tdameritrade.com/grid/public/mutualfunds/profile/performanceBuffer.asp?symbol='+(tick)
 
         # paths to metrics on the quote page
@@ -127,10 +124,10 @@ for tick in TickerList:
         #Append to the overarching dataframe outside of this loop.
         DataCompile.append(metric_dict_data)
 
-print (DataCompile)
+#print (DataCompile)
 
 Data_dict = dict(zip(TickerList[0:250], DataCompile))
 Data_df = pd.DataFrame.from_dict(Data_dict)
-Data_df.to_csv(csv_outputpath + '\\BondsKarsten.csv')
+Data_df.to_csv(csv_outputpath + '\\BondsDataFile.csv')
 
 #metric_dict.to_csv(r'C:\Users\1263654\Desktop\BondTrial.csv')
