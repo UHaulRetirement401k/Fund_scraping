@@ -105,27 +105,29 @@ for tick in TickerList:
                 'Category': TickCategory,
                 'TTM yield': TTMyield,
                 'Effective duration': duration,
-                '3 year Beta': beta_3,
-                '3 Year Rsquare': r2_3,
-                '3 Year Sharpe Ratio': sharpe_3,
-                '3 Year Upside': upside_3,
+                #Downsides
                 '3 Year downside': downside_3,
+                '5 Year downside': downside_5,
+                '10 Year downside': downside_10,
+
+                #Upsides
+                '3 Year Upside': upside_3,
+                '5 Year Upside': upside_5,
+                '10 Year Upside': upside_10,
+
+                #Return
                 '1 Year return': return_1,
                 '3 Year return': return_3,
-
-                ## 5 year
-                '5 Year Rsquare': r2_5,
-                '5 Year Sharpe Ratio': sharpe_5,
-                '5 Year Upside': upside_5,
-                '5 Year downside': downside_5,
                 '5 Year return': return_5,
+                '10 Year return': return_10,
 
-                ## 10 year
-                '10 Year Rsquare': r2_10,
+                #Sharpe and RSquare
+                '3 Year Sharpe Ratio': sharpe_3,
+                '5 Year Sharpe Ratio': sharpe_5,
                 '10 Year Sharpe Ratio': sharpe_10,
-                '10 Year Upside': upside_10,
-                '10 Year downside': downside_10,
-                '10 Year return': return_10
+                '3 Year Rsquare': r2_3,
+                '5 Year Rsquare': r2_5,
+                '10 Year Rsquare': r2_10
                 }
 
             #Append to the overarching dataframe outside of this loop.
